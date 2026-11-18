@@ -25,9 +25,10 @@ sye-lodge-common/       enums, DTO records, shared exceptions and geo helpers
 sye-lodge-persistence/  JPA entities, repositories, specifications, Flyway SQL
 sye-lodge-service/      business logic: auth, OTP, email, storage, audit, admin
 sye-lodge-web/          Spring Boot app, REST controllers, security, static UI
+aws/                   AWS EC2 setup script, systemd unit, Nginx config, guide
 docs/API.md            endpoint reference
-docs/RENDER.md         free Render Blueprint deployment guide
-render.yaml            free Render Blueprint (web service + PostgreSQL)
+docs/RENDER.md         Render Blueprint deployment guide (alternative)
+render.yaml            Render Blueprint (web service + PostgreSQL)
 Dockerfile             multi-stage production image
 docker-entrypoint.sh   container entrypoint (drops privileges)
 .env.example           environment variable template
@@ -92,13 +93,16 @@ policy applies to geocoding and map tiles.
 
 ## 4. Deployment
 
-Production is deployed on Render with the free Blueprint in `render.yaml`:
-one Docker web service built from `Dockerfile` and one managed PostgreSQL
-database. Every push to `main` deploys automatically.
-[docs/RENDER.md](docs/RENDER.md) is the only deployment guide. It covers the
-one-click deploy, demo accounts, free-plan limits (idle sleep, 30-day database
-expiry, console-only email), environment variables including the `APP_URL` used
-in email links, the administrator setup flow and the Neon migration path.
+The recommended production deployment is a single AWS EC2 `t3.micro` running
+Ubuntu 24.04, Java 25, PostgreSQL and Nginx. See
+[aws/README.md](aws/README.md) for the complete guide: instance launch,
+security group, one-time setup script, logs, billing alarm, updates after a
+push, and adding a domain with free HTTPS later. Without a domain the site is
+HTTP-only at the EC2 public IP.
+
+The Render Blueprint in `render.yaml` and [docs/RENDER.md](docs/RENDER.md)
+remain available as an alternative, but Render accounts have been suspended,
+so AWS EC2 is the current target.
 
 Demo accounts use the password `Demo@1234`:
 
@@ -110,7 +114,8 @@ Demo accounts use the password `Demo@1234`:
 | Approved landlord | `ama.landlord@sye_lodge.test` |
 | Pending landlord | `kofi.landlord@sye_lodge.test` |
 
-The Blueprint sets `DEMO_DATA=true` and `DEMO_PASSWORD=Demo@1234`. Set
-`DEMO_DATA=false` for an empty catalogue. The original administrators
+The AWS setup script and the Blueprint both set `DEMO_DATA=true` and
+`DEMO_PASSWORD=Demo@1234`. Set `DEMO_DATA=false` for an empty catalogue.
+The original administrators
 (`fblesselikem@gmail.com`, `ayensusamuel866@gmail.com`,
 `deiyeshua05@gmail.com`) activate their accounts at `/admin-setup.html`.

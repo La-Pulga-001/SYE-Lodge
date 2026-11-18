@@ -1,0 +1,29 @@
+[Unit]
+Description=SYE Lodge Spring Boot application
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=syelodge
+Group=syelodge
+WorkingDirectory=/opt/sye-lodge
+EnvironmentFile=/etc/sye-lodge.env
+Environment=PORT=8080
+Environment=UPLOAD_DIR=/opt/sye-lodge/uploads
+Environment=LOG_FILE=/opt/sye-lodge/logs/sye_lodge.log
+ExecStart=/usr/bin/java -jar /opt/sye-lodge/sye-lodge-web/target/sye-lodge-web-1.0.0.jar
+Restart=always
+RestartSec=5
+TimeoutStopSec=20
+KillMode=mixed
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=sye-lodge
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ReadWritePaths=/opt/sye-lodge/uploads /opt/sye-lodge/logs
+
+[Install]
+WantedBy=multi-user.target
