@@ -1,0 +1,22 @@
+# Keep the source bundle small; the EB platform builds the JAR on-instance.
+.git/
+.aws/
+.elasticbeanstalk/
+.vscode/
+.idea/
+aws/
+docs/
+elasticbeanstalk/
+render.yaml
+Dockerfile
+docker-entrypoint.sh
+run-dev.bat
+.env
+.env.example
+*.md
+*.log
+target/
+**/target/
+uploads/
+logs/
+application.jar

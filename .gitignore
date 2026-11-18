@@ -1,6 +1,8 @@
 # Maven
 target/
 *.class
+application.jar
+*.zip
 .mvn/wrapper/maven-wrapper.jar
 
 # IDE

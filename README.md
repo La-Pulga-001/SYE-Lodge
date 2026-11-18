@@ -25,6 +25,12 @@ sye-lodge-common/       enums, DTO records, shared exceptions and geo helpers
 sye-lodge-persistence/  JPA entities, repositories, specifications, Flyway SQL
 sye-lodge-service/      business logic: auth, OTP, email, storage, audit, admin
 sye-lodge-web/          Spring Boot app, REST controllers, security, static UI
+Buildfile              on-instance Maven build for Elastic Beanstalk
+Procfile               EB Java process command
+.ebextensions/         EB environment and instance configuration
+.platform/nginx/       EB nginx upload limit
+.elasticbeanstalk/     EB CLI project configuration
+elasticbeanstalk/      EB creation, secrets and full deployment guide
 aws/                   AWS EC2 setup script, systemd unit, Nginx config, guide
 docs/API.md            endpoint reference
 docs/RENDER.md         Render Blueprint deployment guide (alternative)
@@ -93,16 +99,18 @@ policy applies to geocoding and map tiles.
 
 ## 4. Deployment
 
-The recommended production deployment is a single AWS EC2 `t3.micro` running
-Ubuntu 24.04, Java 25, PostgreSQL and Nginx. See
-[aws/README.md](aws/README.md) for the complete guide: instance launch,
-security group, one-time setup script, logs, billing alarm, updates after a
-push, and adding a domain with free HTTPS later. Without a domain the site is
-HTTP-only at the EC2 public IP.
+The recommended deployment is **AWS Elastic Beanstalk** on the Java SE
+platform (`Corretto 25` on Amazon Linux 2023) with a coupled PostgreSQL
+database from Amazon RDS. See
+[elasticbeanstalk/README.md](elasticbeanstalk/README.md) for every required
+file and the full guide: EB CLI setup, one-command environment creation,
+secrets, logs, updates, billing alarm and HTTPS later. The site is HTTP-only
+at `http://sye-lodge-prod.elasticbeanstalk.com` until a domain is attached.
 
-The Render Blueprint in `render.yaml` and [docs/RENDER.md](docs/RENDER.md)
-remain available as an alternative, but Render accounts have been suspended,
-so AWS EC2 is the current target.
+A manual AWS EC2 kit remains in [aws/README.md](aws/README.md), and the Render
+Blueprint in `render.yaml` and [docs/RENDER.md](docs/RENDER.md) is kept as an
+alternative. Render accounts have been suspended, so Elastic Beanstalk is the
+current target.
 
 Demo accounts use the password `Demo@1234`:
 
@@ -114,8 +122,8 @@ Demo accounts use the password `Demo@1234`:
 | Approved landlord | `ama.landlord@sye_lodge.test` |
 | Pending landlord | `kofi.landlord@sye_lodge.test` |
 
-The AWS setup script and the Blueprint both set `DEMO_DATA=true` and
-`DEMO_PASSWORD=Demo@1234`. Set `DEMO_DATA=false` for an empty catalogue.
-The original administrators
+The Elastic Beanstalk config, the AWS setup script and the Blueprint all set
+`DEMO_DATA=true` and `DEMO_PASSWORD=Demo@1234`. Set `DEMO_DATA=false` for an
+empty catalogue. The original administrators
 (`fblesselikem@gmail.com`, `ayensusamuel866@gmail.com`,
 `deiyeshua05@gmail.com`) activate their accounts at `/admin-setup.html`.
