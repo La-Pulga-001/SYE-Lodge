@@ -1,7 +1,7 @@
 # Render Blueprint for SYE Lodge.
 #
 # One-click deploy:
-#   https://render.com/deploy?repo=https://github.com/allgee-tech/SYE-Lodge
+#   https://render.com/deploy?repo=https://github.com/La-Pulga-001/SYE-Lodge
 #
 # Creates one free Docker web service and one free Render Postgres database in
 # Frankfurt (the closest Render region to Ghana). Free-plan limits, the 30-day

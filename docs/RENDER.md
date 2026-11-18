@@ -27,9 +27,9 @@ apply: a Docker web service and a PostgreSQL database, both in Frankfurt.
 1. Sign in to the teammate's Render account.
 2. Open this link:
 
-   <https://render.com/deploy?repo=https://github.com/allgee-tech/SYE-Lodge>
+   <https://render.com/deploy?repo=https://github.com/La-Pulga-001/SYE-Lodge>
 
-3. Connect GitHub if asked, then choose the `allgee-tech/SYE-Lodge` repo and
+3. Connect GitHub if asked, then choose the `La-Pulga-001/SYE-Lodge` repo and
    the `main` branch.
 4. Give the Blueprint a name, for example `sye_lodge`.
 5. Apply. Render creates `sye-lodge-db` and `sye_lodge`, builds the Docker image
@@ -49,13 +49,13 @@ The repository is public, but Render's GitHub integration only lists repos the
 connected GitHub account can grant access to. If it is missing:
 
 - Add the teammate as a collaborator on GitHub
-  (`allgee-tech/SYE-Lodge` → Settings → Collaborators), then reconnect GitHub
+  (`La-Pulga-001/SYE-Lodge` → Settings → Collaborators), then reconnect GitHub
   in Render, or
 - Fork the repo to the teammate's GitHub account and deploy the fork. Pushes to
   the original repo will not auto-deploy in that case.
 
 As a last resort, create the service manually: **New → Web Service → Public Git
-repository**, paste `https://github.com/allgee-tech/SYE-Lodge`, choose Docker,
+repository**, paste `https://github.com/La-Pulga-001/SYE-Lodge`, choose Docker,
 then create the Postgres database and wire the variables from section 3 by
 hand.
 
